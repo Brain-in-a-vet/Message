@@ -1,0 +1,7 @@
+#每半小时抓取新闻
+*/15 * * * * cd /opt/workspace/Message/news && sh run_news.sh
+#每2个小时抓取资讯
+0 */1 * * * cd /opt/workspace/Message/msg && sh run_msg.sh
+#每天上午7点定时发送昨天所有的新闻
+0 7 * * * cd /opt/workspace/Message && sh send_email.sh
+
