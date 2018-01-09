@@ -70,13 +70,11 @@ targetUrl="http://top.baidu.com/buzz?b=3"
 page=urllib.urlopen(targetUrl)
 soup = BeautifulSoup(page,"lxml")
 i=0
-timestr=time.strftime("%Y%m%d%H",time.localtime())
+timestr=time.strftime("%Y%m%d%H%M%S",time.localtime())
 for p in soup.find_all('a',attrs={"class":"list-title"}):
     if(p.string != None):
         ps=p.string
         
-        pspath="/data/baidu_img/"+str(timestr)+"/"
-        pspath+=str(i)+"/"
-        
+        pspath="/data/baidu_img/"+str(timestr)+str(i)+"/"
         print ps+" "+pspath
         i=i+1
