@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-   
+#!/Usr/Bin/Python2
+import sys
+import os
+from  pyPdf import PdfFileReader, PdfFileWriter
+
+
+def merge(input_dir,output_dir,filename):
+
+
+    input_one = file(input_dir+filename, 'rb')
+
+    
+    pdf_input_one = PdfFileReader(input_one)
+
+    
+    numOne = pdf_input_one.getNumPages()
+
+    print numOne
+
+    pdf_output = PdfFileWriter()
+    
+    index_i = 0
+    check = numOne%2
+    if check == 1 :
+        index_center = numOne//2
+    else:
+        index_center = numOne//2-1
+    index_j = index_center+1
+
+    
+    while True:
+        if index_i > index_center:break
+
+        page1=pdf_input_one.getPage(index_i)
+        pdf_output.addPage(page1)
+
+        if index_j == numOne:break
+        page2=pdf_input_one.getPage(index_j)
+        pdf_output.addPage(page2)
+
+        index_i += 1
+        index_j += 1
+
+
+    pdf_name = output_dir+filename
+    
+    output_stream = file( pdf_name,'wb')
+    pdf_output.write(output_stream) 
+    output_stream.close()
+    input_one.close()
+    print 'Done!'
+
+
+
+input_dir="/Users/yinyilin/Desktop/problem/input/"
+output_dir="/Users/yinyilin/Desktop/problem/output/"
+
+
+merge(input_dir,output_dir,"java1.pdf")
+merge(input_dir,output_dir,"jvm1.pdf")
+merge(input_dir,output_dir,"jvm2.pdf")
+merge(input_dir,output_dir,"mysql2.pdf")
+merge(input_dir,output_dir,"photo.pdf")
+merge(input_dir,output_dir,"python1.pdf")
+merge(input_dir,output_dir,"render1.pdf")
+merge(input_dir,output_dir,"RTR.pdf")
+
+
+
+#当前目录路径 #挡墙路径下所有子目录 当前路径下所有非目录子文件
+#for root, dirs, files in os.walk(input_dir):
+#    for file in files:
+#    	if os.path.splitext(file)[1] == '.pdf':
+#    		filename=os.path.basename(file)
+#    		merge(input_dir+filename,output_dir,filename)	
