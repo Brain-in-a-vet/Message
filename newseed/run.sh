@@ -3,7 +3,7 @@
 i=1
 while true
 do
-    if [ $i -le 15230 ];then
+    if [ $i -le 1523 ];then
         python invest.py "http://www.newseed.cn/invest/p$i"
         echo "$i Done"
         i=$(($i+1))
